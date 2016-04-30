@@ -14,47 +14,12 @@ use Illuminate\Http\Request;
 |
 */
 
-/**
- * Show Link Dashboard
- */
 Route::get('/', function () {
-    $links = Link::orderBy('created_at', 'asc')->get();
-
-    return view('links', [
-        'links' => $links
-    ]);
+	return view('welcome');
 });
 
-/**
- * Add New Link
- */
-Route::post('/link', function (Request $request) {
-    $validator = Validator::make($request->all(), [
-        'name' => 'required|max:255',
-        'url' => 'required|max:255',
-        'description' => 'required|max:255',
-    ]);
+Route::get('/links', 'LinkController@index');
+Route::post('/link', 'LinkController@store');
+Route::delete('/link/{link}', 'LinkController@destroy');
 
-    if ($validator->fails()) {
-        return redirect('/')
-            ->withInput()
-            ->withErrors($validator);
-    }
-
-    $task = new Link;
-    $task->name = $request->name;
-    $task->url = $request->url;
-    $task->description = $request->description;
-    $task->save();
-
-    return redirect('/');
-});
-
-/**
- * Delete Link
- */
-Route::delete('/link/{link}', function (Link $link) {
-    $link->delete();
-
-    return redirect('/');
-});
+Route::auth();
