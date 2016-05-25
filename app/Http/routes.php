@@ -41,13 +41,20 @@ Route::post('/link', function (Request $request) {
             ->withErrors($validator);
     }
 
-    $task = new Link;
-    $task->name = $request->name;
-    $task->url = $request->url;
-    $task->description = $request->description;
-    $task->save();
+    $link = new Link;
+    $link->name = $request->name;
+    $link->url = $request->url;
+    $link->description = $request->description;
+    $link->save();
 
     return redirect('/');
+});
+
+Route::get('/link/{link}', function (Link $link) {
+
+    return view('link', [
+        'link' => $link
+    ]);
 });
 
 /**
