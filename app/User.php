@@ -23,4 +23,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Get all of the links for the user
+     */
+    public function links()
+    {
+        return $this->hasMany(Link::class);
+    }
 }

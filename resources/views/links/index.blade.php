@@ -1,4 +1,4 @@
-<!-- resources/views/links.blade.php -->
+<!-- resources/views/links/index.blade.php -->
 
 @extends('layouts.app')
 
@@ -53,7 +53,6 @@
                 </div>
             </div>
         </form>
-    </div>
 
     <!-- Current Links -->
     @if (count($links) > 0)
@@ -109,4 +108,6 @@
             </div>
         </div>
     @endif
+
+    </div>
 @endsection
