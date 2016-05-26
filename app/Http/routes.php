@@ -44,6 +44,7 @@ Route::post('/link', function (Request $request) {
     $link = new Link;
     $link->name = $request->name;
     $link->url = $request->url;
+    $link->tags = $request->tags;
     $link->description = $request->description;
     $link->save();
 

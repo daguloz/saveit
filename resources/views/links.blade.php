@@ -16,7 +16,7 @@
 
             <!-- Link Name -->
             <div class="form-group">
-                <label for="link-name" class="col-sm-3 control-label">Link</label>
+                <label for="link-name" class="col-sm-3 control-label">Name</label>
 
                 <div class="col-sm-6">
                     <input type="text" name="name" id="link-name" class="form-control">
@@ -34,6 +34,13 @@
                 <label for="link-description" class="col-sm-3 control-label">Description</label>
                 <div class="col-sm-6">
                     <input type="text" name="description" id="link-description" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="link-description" class="col-sm-3 control-label">Tags</label>
+                <div class="col-sm-6">
+                    <input type="text" name="tags" id="link-tags" class="form-control">
                 </div>
             </div>
 
@@ -62,6 +69,7 @@
                     <thead>
                         <th>Link</th>
                         <th>URL</th>
+                        <th>Tags</th>
                         <th>Description</th>
                         <th>&nbsp;</th>
                     </thead>
@@ -76,6 +84,9 @@
                                 </td>
                                 <td>
                                     <div><a href="{{ $link->url }}" target="_blank">{{ $link->url }}</a></div>
+                                </td>
+                                <td>
+                                    <div>{{ $link->tags }}</div>
                                 </td>
                                 <td>
                                     <div>{{ $link->description }}</div>
