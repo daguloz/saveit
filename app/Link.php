@@ -16,6 +16,11 @@ class Link extends Model
     	'url', 'name', 'description'
     ];
 
+    public function tag()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+
     public function user()
     {
     	return $this->belongsTo(User::class);
