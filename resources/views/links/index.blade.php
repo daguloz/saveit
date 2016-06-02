@@ -7,59 +7,14 @@
     <!-- Bootstrap Boilerplate... -->
 
     <div class="panel-body">
-        <!-- Display Validation Errors -->
-        @include('common.errors')
 
-        <!-- New Link Form -->
-        <form action="{{ url('link') }}" method="POST" class="form-horizontal">
-            {!! csrf_field() !!}
-
-            <!-- Link Name -->
-            <div class="form-group">
-                <label for="link-name" class="col-sm-3 control-label">Name</label>
-
-                <div class="col-sm-6">
-                    <input type="text" name="name" id="link-name" class="form-control">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="link-url" class="col-sm-3 control-label">URL</label>
-                <div class="col-sm-6">
-                    <input type="text" name="url" id="link-url" class="form-control">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="link-description" class="col-sm-3 control-label">Description</label>
-                <div class="col-sm-6">
-                    <input type="text" name="description" id="link-description" class="form-control">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="link-description" class="col-sm-3 control-label">Tags</label>
-                <div class="col-sm-6">
-                    <input type="text" name="tags" id="link-tags" class="form-control">
-                </div>
-            </div>
-
-            <!-- Add Link Button -->
-            <div class="form-group">
-                <div class="col-sm-offset-3 col-sm-6">
-                    <button type="submit" class="btn btn-default">
-                        <i class="fa fa-plus"></i> Add Link
-                    </button>
-                </div>
-            </div>
-        </form>
-
-    <!-- Current Links -->
-    @if (count($links) > 0)
+        <!-- Current Links -->
         <div class="panel panel-default">
             <div class="panel-heading">
-                Current Links
+                Saved Links
             </div>
+
+            @if (count($links) > 0)
 
             <div class="panel-body">
                 <table class="table table-striped link-table">
@@ -106,8 +61,68 @@
                     </tbody>
                 </table>
             </div>
-        </div>
-    @endif
 
+            @else
+            <div class="panel-body">
+                You have no links saved. What are you waiting for? Go add some!
+            </div>
+            @endif
+
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Add new link
+            </div>
+
+            <div class="panel-body">
+                <!-- Display Validation Errors -->
+                @include('common.errors')
+
+                <!-- New Link Form -->
+                <form action="{{ url('link') }}" method="POST" class="form-horizontal">
+                    {!! csrf_field() !!}
+
+                    <!-- Link Name -->
+                    <div class="form-group">
+                        <label for="link-name" class="col-sm-3 control-label">Name</label>
+
+                        <div class="col-sm-6">
+                            <input type="text" name="name" id="link-name" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="link-url" class="col-sm-3 control-label">URL</label>
+                        <div class="col-sm-6">
+                            <input type="text" name="url" id="link-url" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="link-description" class="col-sm-3 control-label">Description</label>
+                        <div class="col-sm-6">
+                            <input type="text" name="description" id="link-description" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="link-description" class="col-sm-3 control-label">Tags</label>
+                        <div class="col-sm-6">
+                            <input type="text" name="tags" id="link-tags" class="form-control">
+                        </div>
+                    </div>
+
+                    <!-- Add Link Button -->
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-6">
+                            <button type="submit" class="btn btn-default">
+                                <i class="fa fa-plus"></i> Add Link
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 @endsection

@@ -8,7 +8,7 @@
                 <div class="panel-heading">Welcome</div>
 
                 <div class="panel-body">
-                    Welcome to <strong>Saveit</strong>
+                    Welcome to <strong>Saveit</strong>! Login or register to start saving your stuff.
                 </div>
             </div>
         </div>

@@ -14,9 +14,10 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/', function () {
-	return view('welcome');
-});
+/* Route::get('/', function () {
+	return view('links');
+}); */
+Route::get('/', 'LinkController@index');
 
 Route::get('/links', 'LinkController@index');
 Route::post('/link', 'LinkController@store');

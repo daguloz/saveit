@@ -58,11 +58,20 @@ class LinkController extends Controller
     		'description' => 'required|max:255'
 		]);
 
+        $tagsExploded = explode(',', $request->tags);
+        $taglist = [];
+
+        foreach ($taglist as $t) {
+            $taglist[] = new App\Tag(['name' => $t]);
+        }
+        
     	$request->user()->links()->create([
     		'name' => $request->name,
     		'url' => $request->url,
     		'description' => $request->description,
-		]);
+        ]);
+        
+        $request->user()->links()->tags()->saveMany($taglist);
 		
 		return redirect('/links');
     }
