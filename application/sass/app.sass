@@ -1,0 +1,258 @@
+///////////////
+// Variables //
+///////////////
+
+$bt_primary: #158cba
+$bt_info: #5bc0de
+$bt_warning: #ff851b
+$bt_danger: #f04124
+$bt_success: #43ac6a
+
+$imageDir: "/res/images"
+$iconDir: "#{$imageDir}/icons"
+
+
+/////////////
+// Fuentes //
+/////////////
+
+@mixin font-mono()
+	font-family: Menlo, Monaco, Consolas, "Courier New", monospace
+
+@mixin font-body()
+	font-family: 'Source Sans Pro', sans-serif !important
+
+/* normal */
+@font-face
+	font-family: 'Source Sans Pro'
+	font-style: normal
+	font-weight: 400
+	src: local('Source Sans Pro'), local('SourceSansPro-Regular'), url(/res/fonts/SourceSansPro-Regular.woff2) format('woff2')
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000
+
+/* bold */
+@font-face
+	font-family: 'Source Sans Pro'
+	font-style: normal
+	font-weight: 700
+	src: local('Source Sans Pro Bold'), local('SourceSansPro-Bold'), url(/res/fonts/SourceSansPro-Bold.woff2) format('woff2')
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000
+
+/* italic */
+@font-face
+	font-family: 'Source Sans Pro'
+	font-style: italic
+	font-weight: 400
+	src: local('Source Sans Pro Italic'), local('SourceSansPro-It'), url(/res/fonts/SourceSansPro-It.woff2) format('woff2')
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000
+
+/* italic & bold */
+@font-face
+	font-family: 'Source Sans Pro'
+	font-style: italic
+	font-weight: 700
+	src: local('Source Sans Pro Bold Italic'), local('SourceSansPro-BoldIt'), url(/res/fonts/SourceSansPro-BoldIt.woff2) format('woff2')
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000
+
+//////////
+// HTML //
+//////////
+
+body
+	//+font-body
+	//color: #222222 !important
+	padding-top: 60px
+
+footer
+	border-top: 1px solid #666
+	margin: 40px 0 20px 0
+	&.debug > div
+		background: #bbb
+		border: 1px solid #777
+		border-radius: 5px
+		margin-top: 10px
+		padding: 5px 20px
+
+input
+	&.input-calendar
+		background: url(#{$iconDir}/calendar_edit.png) no-repeat 98%
+		&[readonly]
+			background-color: #fff
+			cursor: pointer
+
+	&.input-loading
+		background: url(#{$imageDir}/loading.gif) no-repeat 98%
+
+label
+	font-size: 14px
+	font-weight: bold
+	
+pre
+	+font-mono
+
+/////////
+// IDs //
+/////////
+
+
+
+////////////
+// Clases //
+////////////
+
+.alert
+	font-size: 14px
+	&.alert-danger a
+		color: lighten($bt_info, 10%)
+
+.noshow
+	display: none
+
+.page-header, .separator
+	margin-top: 10px
+
+
+/////////////
+// Select2 //
+/////////////
+
+.has-success
+	.select2-selection--single
+		background: url(#{$iconDir}/tick.png) no-repeat 94%
+		border-color: $bt_success
+
+.has-error
+	.select2-selection--single
+		background: url(#{$iconDir}/exclamation.png) no-repeat 94%
+		border-color: $bt_danger
+		//-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075)
+		//box-shadow: inset 0 1px 1px rgba(0,0,0,0.075)
+
+.select2-container
+	display: block
+	width: 100% !important
+	.select2-selection--single
+		height: 39px
+.select-loading
+	background: url(#{$imageDir}/loading.gif) no-repeat right
+
+
+
+////////////
+// Iconos //
+////////////
+
+.icon-big
+	background-repeat: no-repeat
+	background-size: 24px 24px
+	display: inline-block
+	height: 24px
+	margin: 0px 2px
+	vertical-align: middle
+	width: 24px
+
+
+.icon-new
+	background-image: url(/res/images/icon-new.png)
+	background-size: 34px 45px
+	height: 45px
+	width: 34px
+
+.btn-icon
+	background-repeat: no-repeat
+	background-position: 7px 10px
+	padding-left: 28px
+	&.btn-xs
+		background-position: 6px 2px
+.icon
+	background-repeat: no-repeat
+	display: inline-block
+	height: 16px
+	margin: 0px 2px
+	width: 16px
+.label-icon
+	background-repeat: no-repeat
+	background-position: 3px 3px
+	padding-left: 24px
+	padding-top: 4px
+
+.icon-add, .icon-add:active
+	background-image: url(#{$iconDir}/add.png)
+.icon-arrow_right, .icon-arrow_right:active
+	background-image: url(#{$iconDir}/arrow_right.png)
+.icon-arrow_undo, .icon-arrow_undo:active
+	background-image: url(#{$iconDir}/arrow_undo.png)
+.icon-application_view_detail, .icon-application_view_detail:active
+	background-image: url(#{$iconDir}/application_view_detail.png)
+.icon-arrow-180, .icon-arrow-180:active
+	background-image: url(#{$iconDir}/arrow-180.png)
+.icon-arrow-split, .icon-arrow-split:active
+	background-image: url(#{$iconDir}/arrow-split.png)
+.icon-brick, .icon-brick:active
+	background-image: url(#{$iconDir}/brick.png)
+.icon-bullet_magnify, .icon-bullet_magnify:active
+	background-image: url(#{$iconDir}/bullet_magnify.png)
+.icon-chart_bar, .icon-chart_bar:active
+	background-image: url(#{$iconDir}/chart_bar.png)
+.icon-chart_bar_add, .icon-chart_bar_add:active
+	background-image: url(#{$iconDir}/chart_bar_add.png)
+.icon-chart_bar_edit, .icon-chart_bar_edit:active
+	background-image: url(#{$iconDir}/chart_bar_edit.png)
+.icon-chart_organisation, .icon-chart_organisation:active
+	background-image: url(#{$iconDir}/chart_organisation.png)
+.icon-chart_organisation_add, .icon-chart_organisation_add:active
+	background-image: url(#{$iconDir}/chart_organisation_add.png)
+.icon-clipboard_invoice, .icon-clipboard_invoice:active
+	background-image: url(#{$iconDir}/clipboard_invoice.png)
+.icon-cross, .icon-cross:active
+	background-image: url(#{$iconDir}/cross.png)
+.icon-delete, .icon-delete:active
+	background-image: url(#{$iconDir}/delete.png)
+.icon-disk, .icon-disk:active
+	background-image: url(#{$iconDir}/disk.png)
+.icon-document_info, .icon-document_info:active
+	background-image: url(#{$iconDir}/document_info.png)
+.icon-file_extension_pdf, .icon-file_extension_pdf:active
+	background-image: url(#{$iconDir}/file_extension_pdf.png)
+.icon-generate_ssl_certificate, .icon-generate_ssl_certificate:active
+	background-image: url(#{$iconDir}/generate_ssl_certificate.png)
+.icon-hard_hat, .icon-hard_hat:active
+	background-image: url(#{$iconDir}/hard_hat.png)
+.icon-icon_info, .icon-icon_info:active
+	background-image: url(#{$iconDir}/icon_info.gif)
+.icon-ingot, .icon-ingot:active
+	background-image: url(#{$iconDir}/ingot.png)
+.icon-layered_pane, .icon-layered_pane:active
+	background-image: url(#{$iconDir}/layered_pane.png)
+.icon-magnifier, .icon-magnifier:active
+	background-image: url(#{$iconDir}/magnifier.png)
+.icon-package, .icon-package:active
+	background-image: url(#{$iconDir}/package.png)
+.icon-page_copy, .icon-page_copy:active
+	background-image: url(#{$iconDir}/page_copy.png)
+.icon-pencil, .icon-pencil:active
+	background-image: url(#{$iconDir}/pencil.png)
+.icon-plus, .icon-plus:active
+	background-image: url(#{$iconDir}/plus.png)
+.icon-recover_deleted_items, .icon-recover_deleted_items:active
+	background-image: url(#{$iconDir}/recover_deleted_items.png)
+.icon-recycle, .icon-recycle:active
+	background-image: url(#{$iconDir}/recycle.png)
+.icon-search_plus, .icon-search_plus:active
+	background-image: url(#{$iconDir}/search_plus.png)
+.icon-ssl_certificates, .icon-ssl_certificates:active
+	background-image: url(#{$iconDir}/ssl_certificates.png)
+.icon-star, .icon-star:active
+	background-image: url(#{$iconDir}/star.png)
+.icon-table_tab_search, .icon-table_tab_search:active
+	background-image: url(#{$iconDir}/table_tab_search.png)
+.icon-tick, .icon-tick:active
+	background-image: url(#{$iconDir}/tick.png)
+.icon-user_add, .icon-user_add:active
+	background-image: url(#{$iconDir}/user_add.png)
+.icon-user_orange, .icon-user_orange:active
+	background-image: url(#{$iconDir}/user_orange.png)
+.icon-user_suit, .icon-user_suit:active
+	background-image: url(#{$iconDir}/user_suit.png)
+.icon-wrench, .icon-wrench:active
+	background-image: url(#{$iconDir}/wrench.png)

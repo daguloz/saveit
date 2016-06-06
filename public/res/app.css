@@ -1,0 +1,305 @@
+/* normal */
+@font-face {
+  font-family: "Source Sans Pro";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Source Sans Pro"), local("SourceSansPro-Regular"), url(/res/fonts/SourceSansPro-Regular.woff2) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+/* bold */
+@font-face {
+  font-family: "Source Sans Pro";
+  font-style: normal;
+  font-weight: 700;
+  src: local("Source Sans Pro Bold"), local("SourceSansPro-Bold"), url(/res/fonts/SourceSansPro-Bold.woff2) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+/* italic */
+@font-face {
+  font-family: "Source Sans Pro";
+  font-style: italic;
+  font-weight: 400;
+  src: local("Source Sans Pro Italic"), local("SourceSansPro-It"), url(/res/fonts/SourceSansPro-It.woff2) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+/* italic & bold */
+@font-face {
+  font-family: "Source Sans Pro";
+  font-style: italic;
+  font-weight: 700;
+  src: local("Source Sans Pro Bold Italic"), local("SourceSansPro-BoldIt"), url(/res/fonts/SourceSansPro-BoldIt.woff2) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+body {
+  padding-top: 60px;
+}
+
+footer {
+  border-top: 1px solid #666;
+  margin: 40px 0 20px 0;
+}
+footer.debug > div {
+  background: #bbb;
+  border: 1px solid #777;
+  border-radius: 5px;
+  margin-top: 10px;
+  padding: 5px 20px;
+}
+
+input.input-calendar {
+  background: url(/res/images/icons/calendar_edit.png) no-repeat 98%;
+}
+input.input-calendar[readonly] {
+  background-color: #fff;
+  cursor: pointer;
+}
+input.input-loading {
+  background: url(/res/images/loading.gif) no-repeat 98%;
+}
+
+label {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+pre {
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+.alert {
+  font-size: 14px;
+}
+.alert.alert-danger a {
+  color: #85d0e7;
+}
+
+.noshow {
+  display: none;
+}
+
+.page-header, .separator {
+  margin-top: 10px;
+}
+
+.has-success .select2-selection--single {
+  background: url(/res/images/icons/tick.png) no-repeat 94%;
+  border-color: #43ac6a;
+}
+
+.has-error .select2-selection--single {
+  background: url(/res/images/icons/exclamation.png) no-repeat 94%;
+  border-color: #f04124;
+}
+
+.select2-container {
+  display: block;
+  width: 100% !important;
+}
+.select2-container .select2-selection--single {
+  height: 39px;
+}
+
+.select-loading {
+  background: url(/res/images/loading.gif) no-repeat right;
+}
+
+.icon-big {
+  background-repeat: no-repeat;
+  background-size: 24px 24px;
+  display: inline-block;
+  height: 24px;
+  margin: 0px 2px;
+  vertical-align: middle;
+  width: 24px;
+}
+
+.icon-new {
+  background-image: url(/res/images/icon-new.png);
+  background-size: 34px 45px;
+  height: 45px;
+  width: 34px;
+}
+
+.btn-icon {
+  background-repeat: no-repeat;
+  background-position: 7px 10px;
+  padding-left: 28px;
+}
+.btn-icon.btn-xs {
+  background-position: 6px 2px;
+}
+
+.icon {
+  background-repeat: no-repeat;
+  display: inline-block;
+  height: 16px;
+  margin: 0px 2px;
+  width: 16px;
+}
+
+.label-icon {
+  background-repeat: no-repeat;
+  background-position: 3px 3px;
+  padding-left: 24px;
+  padding-top: 4px;
+}
+
+.icon-add, .icon-add:active {
+  background-image: url(/res/images/icons/add.png);
+}
+
+.icon-arrow_right, .icon-arrow_right:active {
+  background-image: url(/res/images/icons/arrow_right.png);
+}
+
+.icon-arrow_undo, .icon-arrow_undo:active {
+  background-image: url(/res/images/icons/arrow_undo.png);
+}
+
+.icon-application_view_detail, .icon-application_view_detail:active {
+  background-image: url(/res/images/icons/application_view_detail.png);
+}
+
+.icon-arrow-180, .icon-arrow-180:active {
+  background-image: url(/res/images/icons/arrow-180.png);
+}
+
+.icon-arrow-split, .icon-arrow-split:active {
+  background-image: url(/res/images/icons/arrow-split.png);
+}
+
+.icon-brick, .icon-brick:active {
+  background-image: url(/res/images/icons/brick.png);
+}
+
+.icon-bullet_magnify, .icon-bullet_magnify:active {
+  background-image: url(/res/images/icons/bullet_magnify.png);
+}
+
+.icon-chart_bar, .icon-chart_bar:active {
+  background-image: url(/res/images/icons/chart_bar.png);
+}
+
+.icon-chart_bar_add, .icon-chart_bar_add:active {
+  background-image: url(/res/images/icons/chart_bar_add.png);
+}
+
+.icon-chart_bar_edit, .icon-chart_bar_edit:active {
+  background-image: url(/res/images/icons/chart_bar_edit.png);
+}
+
+.icon-chart_organisation, .icon-chart_organisation:active {
+  background-image: url(/res/images/icons/chart_organisation.png);
+}
+
+.icon-chart_organisation_add, .icon-chart_organisation_add:active {
+  background-image: url(/res/images/icons/chart_organisation_add.png);
+}
+
+.icon-clipboard_invoice, .icon-clipboard_invoice:active {
+  background-image: url(/res/images/icons/clipboard_invoice.png);
+}
+
+.icon-cross, .icon-cross:active {
+  background-image: url(/res/images/icons/cross.png);
+}
+
+.icon-delete, .icon-delete:active {
+  background-image: url(/res/images/icons/delete.png);
+}
+
+.icon-disk, .icon-disk:active {
+  background-image: url(/res/images/icons/disk.png);
+}
+
+.icon-document_info, .icon-document_info:active {
+  background-image: url(/res/images/icons/document_info.png);
+}
+
+.icon-file_extension_pdf, .icon-file_extension_pdf:active {
+  background-image: url(/res/images/icons/file_extension_pdf.png);
+}
+
+.icon-generate_ssl_certificate, .icon-generate_ssl_certificate:active {
+  background-image: url(/res/images/icons/generate_ssl_certificate.png);
+}
+
+.icon-hard_hat, .icon-hard_hat:active {
+  background-image: url(/res/images/icons/hard_hat.png);
+}
+
+.icon-icon_info, .icon-icon_info:active {
+  background-image: url(/res/images/icons/icon_info.gif);
+}
+
+.icon-ingot, .icon-ingot:active {
+  background-image: url(/res/images/icons/ingot.png);
+}
+
+.icon-layered_pane, .icon-layered_pane:active {
+  background-image: url(/res/images/icons/layered_pane.png);
+}
+
+.icon-magnifier, .icon-magnifier:active {
+  background-image: url(/res/images/icons/magnifier.png);
+}
+
+.icon-package, .icon-package:active {
+  background-image: url(/res/images/icons/package.png);
+}
+
+.icon-page_copy, .icon-page_copy:active {
+  background-image: url(/res/images/icons/page_copy.png);
+}
+
+.icon-pencil, .icon-pencil:active {
+  background-image: url(/res/images/icons/pencil.png);
+}
+
+.icon-plus, .icon-plus:active {
+  background-image: url(/res/images/icons/plus.png);
+}
+
+.icon-recover_deleted_items, .icon-recover_deleted_items:active {
+  background-image: url(/res/images/icons/recover_deleted_items.png);
+}
+
+.icon-recycle, .icon-recycle:active {
+  background-image: url(/res/images/icons/recycle.png);
+}
+
+.icon-search_plus, .icon-search_plus:active {
+  background-image: url(/res/images/icons/search_plus.png);
+}
+
+.icon-ssl_certificates, .icon-ssl_certificates:active {
+  background-image: url(/res/images/icons/ssl_certificates.png);
+}
+
+.icon-star, .icon-star:active {
+  background-image: url(/res/images/icons/star.png);
+}
+
+.icon-table_tab_search, .icon-table_tab_search:active {
+  background-image: url(/res/images/icons/table_tab_search.png);
+}
+
+.icon-tick, .icon-tick:active {
+  background-image: url(/res/images/icons/tick.png);
+}
+
+.icon-user_add, .icon-user_add:active {
+  background-image: url(/res/images/icons/user_add.png);
+}
+
+.icon-user_orange, .icon-user_orange:active {
+  background-image: url(/res/images/icons/user_orange.png);
+}
+
+.icon-user_suit, .icon-user_suit:active {
+  background-image: url(/res/images/icons/user_suit.png);
+}
+
+.icon-wrench, .icon-wrench:active {
+  background-image: url(/res/images/icons/wrench.png);
+}
