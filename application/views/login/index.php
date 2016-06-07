@@ -9,7 +9,7 @@
 		</div>
 	<?php endif; ?>
 	<p>
-		Welcome to Saveit. To continue, please login, or <a href="/register">register a new account</a>.
+		Welcome to Saveit. To continue, please login, or <a href="<?php echo site_url('register'); ?>">register a new account</a>.
 	</p>
 </div>
 

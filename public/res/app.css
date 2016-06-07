@@ -66,6 +66,10 @@ pre {
   font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
+#btn_show_edit_link:hover {
+  cursor: pointer;
+}
+
 .alert {
   font-size: 14px;
 }
@@ -79,6 +83,10 @@ pre {
 
 .page-header, .separator {
   margin-top: 10px;
+}
+
+.list-group-item-labels {
+  padding-top: 5px;
 }
 
 .has-success .select2-selection--single {

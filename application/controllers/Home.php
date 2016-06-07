@@ -49,7 +49,8 @@ class Home extends CI_Controller {
             $form_data = [
                 'url' => $this->input->post('url'),
                 'name' => $this->input->post('name'),
-                'description' => $this->input->post('description')
+                'description' => $this->input->post('description'),
+                'tags' => $this->input->post('tags')
             ];
 
             if (trim($form_data['url']) === '') $form_data['url'] = NULL;

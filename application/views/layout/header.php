@@ -59,11 +59,11 @@
 
                     <ul class="nav navbar-nav navbar-right">
                         <li><p class="navbar-text"><?php echo $name; ?> (<a class="navbar-link"
-                                                    href="/logout">Logout</a>)</p></li>
+                                                    href="<?php echo site_url('logout'); ?>">Logout</a>)</p></li>
                     </ul>
                 <?php else: ?>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a class="navbar-link" href="/login"><span class="icon icon-user_orange"></span>Login</a></li>
+                        <li><a class="navbar-link" href="<?php echo site_url('login'); ?>"><span class="icon icon-user_orange"></span>Login</a></li>
                     </ul>
                 <?php endif; ?>
             </div>

@@ -17,9 +17,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<div class="panel panel-primary">
 		<?php if ($logged_in === true): ?>
 		<div class="panel-heading">
-			<h3 class="panel-title">My links</h3>
+			<h3 class="panel-title">
+				My links
+				<span id="btn_show_edit_link" class="icon icon-pencil"></span>
+			</h3>
 		</div>
-		<div class="list-group">
+		<div class="panel-body noshow" id="alert_edit_info">
+			<p>Select a link to edit</p>
+		</div>
+		<div class="list-group" id="link-list">
 			<?php
 				if (count($links) == 0)
 				{
@@ -31,10 +37,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					{
 						$l->name === NULL ? $name = $l->url : $name = $l->name;
 
-						echo "<a href=\"{$l->url}\" target=\"_blank\" class=\"list-group-item\">";
-						echo "<h4 class=\"list-group-item-heading\">{$name}</h4>";
-						echo "<p>{$l->description}</p>";
-						echo "</a>";
+						echo "\n\t\t\t<a href=\"{$l->url}\" title=\"{$name}\" alt=\"{$l->description}\" target=\"_blank\" class=\"list-group-item\">\n";
+						echo "\t\t\t\t<h4 class=\"list-group-item-heading\">{$name}</h4>\n";
+						echo "\t\t\t\t<p class=\"list-group-item-text\">{$l->description}</p>\n";
+						echo "\t\t\t\t<div class=\"list-group-item-labels\">\n";
+						foreach ($l->tags as $t)
+						{
+							echo "\t\t\t\t\t<span class=\"badge badge-default\" href=\"" . site_url('tag/' . $t->id) . "\">{$t->name}</span>\n";
+						}
+						echo "\t\t\t\t</div>\n";
+						echo "\t\t\t</a>";
 					}
 				}
 			?>
@@ -54,9 +66,36 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<label for="add_link_description">Description</label>
 					<input type="text" class="form-control" name="description" id="add_link_description" placeholder="Search Engine">
 				</div>
+				<div class="form-group">
+					<label for="add_link_tags">Tags</label>
+					<input type="text" class="form-control" name="tags" id="add_link_tags" placeholder="Enter tags separated by commas">
+				</div>
 				<button type="submit" class="btn btn-success">Add new link</button>
 			</form>
 		</div>
+		<div class="panel-body noshow" id="form_edit_link">
+			<form method="POST">
+				<input type="hidden" name="type" value="edit_link">
+				<div class="form-group">
+					<label for="edit_link_url">Url</label>
+					<input type="url" class="form-control" name="url" id="edit_link_url" placeholder="http://www.google.com" required>
+				</div>
+				<div class="form-group">
+					<label for="edit_link_name">Name</label>
+					<input type="text" class="form-control" name="name" id="edit_link_name" placeholder="Google">
+				</div>
+				<div class="form-group">
+					<label for="edit_link_description">Description</label>
+					<input type="text" class="form-control" name="description" id="edit_link_description" placeholder="Search Engine">
+				</div>
+				<div class="form-group">
+					<label for="edit_link_tags">Tags</label>
+					<input type="text" class="form-control" name="tags" id="edit_link_tags" placeholder="Enter tags separated by commas">
+				</div>
+				<button type="submit" class="btn btn-success">Save link</button>
+			</form>
+		</div>
+		
 		<div class="panel-footer">
 			<a id="btn_show_add_link" class="btn btn-primary">Add new link</a>
 		</div>
@@ -66,8 +105,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</div>
 		<div class="panel-body">
 			<ul class="nav nav-pills">
-				<li role="presentation"><a class="btn btn-default" href="/register">Register</a></li>
-				<li role="presentation"><a class="btn btn-default" href="/login">Login</a></li>
+				<li role="presentation"><a class="btn btn-default" href="<?php echo site_url('register'); ?>">Register</a></li>
+				<li role="presentation"><a class="btn btn-default" href="<?php echo site_url('login'); ?>">Login</a></li>
 			</ul>
 		</div>
 		<?php endif; ?>

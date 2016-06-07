@@ -10,27 +10,68 @@ class DbSaveit extends CI_Model
 		$this->CI =& get_instance();
 	}
 
+	public function add_link_tag($data)
+	{
+		return $this->insert_row($data, 'links_tags', false);
+	}
+
+	public function add_tag($data)
+	{
+		return $this->insert_row($data, 'tags');
+	}
+
 	// Register a new user in database
 	// Returns user ID on success
 	// Returns false on error
 	public function add_link($data)
 	{
-		$now = Date('Y-m-d H:i:s');
-		$data['created_at'] = $now;
-		$data['updated_at'] = $now;
-
-		$table = 'links';
-		
-		if ($this->CI->db->insert($table, $data)) {
-			return $this->CI->db->insert_id();
-		}
-		return false;
+		return $this->insert_row($data, 'links');
 	}
 
 	public function get_links($type, $value)
 	{
-		$fields = ['id', 'url', 'name', 'description'];
-		return $this->_get_rows('links', $fields, $type, $value);
+		
+		$this->CI->db->select('id, url, name, description');
+
+		$this->CI->db->where($type, $value);
+
+		// Construye la sentencia SQL y la ejecuta
+		if ($query = $this->CI->db->get('links')) {
+			$result = [];
+			if ($query->num_rows() > 0)
+			{
+				foreach ($query->result() as $row)
+				{
+					$row->tags = $this->get_tags('link_id', $row->id);
+					$result[] = $row;
+				}
+			}
+		}
+		return $result;
+	}
+
+	// Get an user with the specified filter
+	public function get_tags($field, $value)
+	{
+		$this->CI->db->select('t.id, t.name');
+
+		$this->CI->db->where($field, $value);
+
+		$this->CI->db->join('tags as t', 't.id = tag_id');
+
+		// Construye la sentencia SQL y la ejecuta
+		if ($query = $this->CI->db->get('links_tags')) {
+			$result = [];
+			if ($query->num_rows() > 0)
+			{
+				foreach ($query->result() as $row)
+				{
+					$result[] = $row;
+				}
+			}
+		}
+		return $result;
+		return $this->_get_row('links_tags', $fields, 'id', $id);
 	}
 
 	// Get an user with the specified filter
@@ -38,6 +79,21 @@ class DbSaveit extends CI_Model
 	{
 		$fields = ['id', 'email', 'password', 'name'];
 		return $this->_get_row('users', $fields, $type, $value);
+	}
+
+	public function insert_row($data, $table, $dates = true)
+	{
+		if ($dates === true)
+		{
+			$now = Date('Y-m-d H:i:s');
+			$data['created_at'] = $now;
+			$data['updated_at'] = $now;
+		}
+		
+		if ($this->CI->db->insert($table, $data)) {
+			return $this->CI->db->insert_id();
+		}
+		return false;
 	}
 
 	public function insert_session($user_id)
