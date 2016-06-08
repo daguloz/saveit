@@ -17,13 +17,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<div class="panel panel-primary">
 		<?php if ($logged_in === true): ?>
 		<div class="panel-heading">
-			<h3 class="panel-title">
+			<h3 class="panel-title" id="link-list-header">
 				My links
 				<span id="btn_show_edit_link" class="icon icon-pencil"></span>
 			</h3>
 		</div>
 		<div class="panel-body noshow" id="alert_edit_info">
-			<p>Select a link to edit</p>
+			<div class="alert alert-info fade in" role="alert">Selec a link to edit</div>
 		</div>
 		<div class="list-group" id="link-list">
 			<?php
@@ -73,7 +73,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<button type="submit" class="btn btn-success">Add new link</button>
 			</form>
 		</div>
-		<div class="panel-body noshow" id="form_edit_link">
+		<div class="panel-body noshow" id="form-link-edit">
 			<form method="POST">
 				<input type="hidden" name="type" value="edit_link">
 				<div class="form-group">
@@ -92,11 +92,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<label for="edit_link_tags">Tags</label>
 					<input type="text" class="form-control" name="tags" id="edit_link_tags" placeholder="Enter tags separated by commas">
 				</div>
-				<button type="submit" class="btn btn-success">Save link</button>
+				<button type="submit" class="btn btn-success">Save</button>
+				<button type="button" id="edit-link-cancel" class="btn btn-default">Cancel</button>
 			</form>
 		</div>
 		
-		<div class="panel-footer">
+		<div class="panel-footer" id="link-list-bottom-buttons">
 			<a id="btn_show_add_link" class="btn btn-primary">Add new link</a>
 		</div>
 		<?php else: ?>

@@ -27,23 +27,60 @@ $(document).ready(function () {
 		Utils.showScroll($("#form_add_link"));
 	});
 
+	// Edit button
 	$("#btn_show_edit_link").on('click', function() {
 
+		// Change link behaviour to show edit form
 		$("#link-list a").on('click', function(e) {
+
 			e.preventDefault();
+
+			// Find the actual link element
 			var elem;
 			if (e.target.nodeName === "A")
 				elem = $(e.target);
 			else
 				elem = $(e.target).parent();
+
+			// Show edit link form
 			$("#edit_link_url").val(elem.attr('href'));
 			$("#edit_link_name").val(elem.attr('title'));
 			$("#edit_link_description").val(elem.attr('alt'));
-			$("#form_edit_link").slideDown();
+			$("#form-link-edit").slideDown();
+			
+			// Hide the rest of the stuff
+			$("#btn_show_edit_link").fadeOut();
+			$("#alert_edit_info").slideUp();
+			$("#link-list").slideUp();
+			$("#link-list-bottom-buttons").slideUp();
+
+			$("#link-list-header").fadeOut(function() {
+				$(this).text("Editing link").fadeIn();
+			});
+
 			Utils.showScroll($("#form_edit_link"));
 		});
+
+		// Show the info message
 		$("#alert_edit_info").slideDown();
 		Utils.showScroll($("#alert_edit_info"));
+	});
+
+	// Cancel button when editing a link
+	$("#edit-link-cancel").on("click", function() {
+
+			// Show back stuff
+			$("#btn_show_edit_link").fadeIn();
+			$("#link-list").slideDown();
+			$("#link-list-bottom-buttons").slideDown();
+
+			$("#form-link-edit").slideUp();
+
+			$("#link-list-header").fadeOut(function() {
+				$(this).text("Your links").fadeIn();
+			});
+
+			Utils.showScroll($("#link-list-header"));
 	});
 });
 
