@@ -1,3 +1,5 @@
+var link_action = "";
+
 $(document).ready(function () {
 	
 	"use strict";
@@ -21,66 +23,135 @@ $(document).ready(function () {
 	if ($().select2 !== undefined)
 		Utils.setupSelect2(".select2", false);
 
-	$("#btn_show_add_link").on('click', function() {
-		$("#btn_show_add_link").parent().hide();
-		$("#form_add_link").slideDown();
-		Utils.showScroll($("#form_add_link"));
+	// Add link form
+	$("#button-show-link-add").on('click', function() {
+		
+		link_action = "add_link";
+
+		// Hide stuff
+		$("#link-list-buttons").fadeOut();
+		$("#link-list").slideUp();
+		$("#link-list-header-buttons").fadeOut();
+		$("#link-list-bottom-buttons").slideUp();
+
+		// Show form
+		$("#form-link-add").slideDown();
+		$("#link-list-footer-buttons").slideDown();
+		Utils.showScroll($("#form-link-add"));
+
+		$("#link-list-header-text").fadeOut(function() {
+			$(this).text("Add a node").fadeIn();
+		});
+
+		$("#node-add-type-link").on('change', function (e) {
+			link_action = "add_link";
+			$("#node-add-category").slideUp();
+			$("#node-add-link").slideDown();
+		});
+
+		$("#node-add-type-category").on('change', function (e) {
+			link_action = "add_category";
+			$("#node-add-link").slideUp();
+			$("#node-add-category").slideDown();
+		});
 	});
 
-	// Edit button
-	$("#btn_show_edit_link").on('click', function() {
+	// Edit link form
+	$("#button-show-link-edit").on('click', function() {
+		set_action('edit');
+	});
 
-		// Change link behaviour to show edit form
-		$("#link-list a").on('click', function(e) {
+	// Delete link
+	$("#button-show-link-delete").on('click', function() {
+		set_action('delete');
+	});
 
+	// Cancel button when editing a link
+	$(".button-link-cancel").on("click", function() {
+
+		link_action = "";
+
+		// Hide form
+		$("#form-link-add").slideUp();
+		$("#form-link-edit").slideUp();
+
+		// Show back stuff
+		$("#link-list").slideDown();
+		$("#link-list-header-buttons").fadeIn();
+		$("#link-list-footer-buttons").slideUp();
+
+		$("#link-list-header-text").fadeOut(function() {
+			$(this).text("Your links").fadeIn();
+		});
+
+		Utils.showScroll($("#link-list-header"));
+	});
+
+	$("#button-link-save").on('click', function(e) {
+		if (link_action === 'add_link')
+		{
+			$("#node-add-link .submit").click();
+		}
+		if (link_action === 'add_category')
+		{
+			$("#node-add-category .submit").click();
+		}
+		else if (link_action === 'edit')
+		{
+			$("#form-link-edit form .submit").click();
+		}
+	});
+
+	// Change link behaviour to show edit form
+	$("#link-list a").on('click', function(e) {
+
+		var elem;
+
+		if (link_action === 'edit')
+		{
 			e.preventDefault();
 
 			// Find the actual link element
-			var elem;
 			if (e.target.nodeName === "A")
 				elem = $(e.target);
 			else
 				elem = $(e.target).parent();
 
 			// Show edit link form
-			$("#edit_link_url").val(elem.attr('href'));
-			$("#edit_link_name").val(elem.attr('title'));
-			$("#edit_link_description").val(elem.attr('alt'));
+			$("#link-edit-url").val(elem.attr('href'));
+			$("#link-edit-name").val(elem.attr('title'));
+			$("#link-edit-description").val(elem.attr('alt'));
 			$("#form-link-edit").slideDown();
+			$("#link-list-footer-buttons").slideDown();
 			
 			// Hide the rest of the stuff
-			$("#btn_show_edit_link").fadeOut();
-			$("#alert_edit_info").slideUp();
+			$("#alert-info-edit").slideUp();
 			$("#link-list").slideUp();
-			$("#link-list-bottom-buttons").slideUp();
 
-			$("#link-list-header").fadeOut(function() {
+			// Change header text
+			$("#link-list-header-text").fadeOut(function() {
 				$(this).text("Editing link").fadeIn();
 			});
 
-			Utils.showScroll($("#form_edit_link"));
-		});
+			Utils.showScroll($("#form-link-edit"));
+		}
+		else if (link_action === 'delete')
+		{
+			e.preventDefault();
 
-		// Show the info message
-		$("#alert_edit_info").slideDown();
-		Utils.showScroll($("#alert_edit_info"));
-	});
+			// Find the actual link element
+			if (e.target.nodeName === "A")
+				elem = $(e.target);
+			else
+				elem = $(e.target).parent();
 
-	// Cancel button when editing a link
-	$("#edit-link-cancel").on("click", function() {
+			// Show confirm delete dialog
+			$('#link-delete-dialog').modal('show');
 
-			// Show back stuff
-			$("#btn_show_edit_link").fadeIn();
-			$("#link-list").slideDown();
-			$("#link-list-bottom-buttons").slideDown();
-
-			$("#form-link-edit").slideUp();
-
-			$("#link-list-header").fadeOut(function() {
-				$(this).text("Your links").fadeIn();
-			});
-
-			Utils.showScroll($("#link-list-header"));
+			$("#link-delete-url").text(elem.attr('href'));
+			$("#link-delete-name").text(elem.attr('title'));
+			$("#link-delete-description").text(elem.attr('alt'));
+		}
 	});
 });
 
@@ -320,3 +391,19 @@ var Utils = {
 		});
 	}
 };
+
+function set_action(action)
+{
+	if ((action !== null) && (action !== undefined))
+	{
+		link_action = action;
+
+		// Change header text
+		$("#link-list-header-text").fadeOut(function() {
+			$(this).text("Select a link to " + action).fadeIn();
+		});
+
+		// Hide top buttons
+		$("#link-list-header-buttons").fadeOut();
+	}
+}

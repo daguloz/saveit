@@ -43,6 +43,10 @@ class Home extends CI_Controller {
     {
         $type = $this->input->post('type');
 
+        echo '<pre>';
+        print_r($_POST);
+        die();
+        
         if ($type === 'add_link')
         {
             // Obtain form data
