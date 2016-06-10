@@ -41,7 +41,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					{
 						$l->name === NULL ? $name = $l->url : $name = $l->name;
 
-						echo "\n\t\t\t<a href=\"{$l->url}\" title=\"{$name}\" alt=\"{$l->description}\" target=\"_blank\" class=\"list-group-item\">\n";
+						echo "\n\t\t\t<a href=\"{$l->url}\" title=\"{$name}\" alt=\"{$l->description}\" data-node-id=\"{$l->id}\" target=\"_blank\" class=\"list-group-item\">\n";
 						echo "\t\t\t\t<h4 class=\"list-group-item-heading\">{$name}</h4>\n";
 						echo "\t\t\t\t<p class=\"list-group-item-text\">{$l->description}</p>\n";
 						echo "\t\t\t\t<div class=\"list-group-item-labels\">\n";
@@ -85,6 +85,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<input type="text" class="form-control" name="description" id="link-add-description" placeholder="">
 				</div>
 				<div class="form-group">
+					<label for="link-add-category">Category</label>
+					<select class="form-control select2" name="category" id="link-add-category">
+						<option value="" selected>Uncategorized</option>
+						<?php foreach ($categories as $cat) {
+							echo "<option value=\"{$cat->id}\">{$cat->name}</option>";
+						} ?>
+					</select>
+				</div>
+				<div class="form-group">
 					<label for="link-add-tags">Tags</label>
 					<input type="text" class="form-control" name="tags" id="link-add-tags" placeholder="Enter tags separated by commas">
 				</div>
@@ -98,7 +107,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				</div>
 				<div class="form-group">
 					<label for="category-add-name">Parent Category</label>
-					<input type="text" class="form-control" name="parent" id="category-add-parent" placeholder="">
+					<select class="form-control select2" name="parent" id="category-add-parent">
+						<option value="" selected>None</option>
+						<?php foreach ($categories as $cat) {
+							echo "<option value=\"{$cat->id}\">{$cat->name}</option>";
+						} ?>
+					</select>
 				</div>
 				<div class="form-group">
 					<label for="category-add-description">Description</label>
@@ -170,8 +184,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default button-link-cancel" data-dismiss="modal">Cancel</button>
-				<button type="button" class="btn btn-danger">Delete</button>
+				<button type="button" id="link-delete-confirm" class="btn btn-danger">Delete</button>
 			</div>
+			<form method="POST" id="link-delete-form">
+				<input type="hidden" name="type" value="link-delete">
+				<input type="hidden" name="id" id="link-delete-id">
+			</form>
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
 </div><!-- /.modal -->

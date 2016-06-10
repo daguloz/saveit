@@ -10,16 +10,25 @@ class Link
         $this->CI =& get_instance();
     }
 
-    public function add($form_data)
+    public function add($type, $form_data)
     {
+        if (($type !== 'link') && ($type !== 'category'))
+            return;
 
         $user_id = $this->CI->session->userdata['user_id'];
         $form_data['user_id'] = $user_id;
         $tags = explode(',', $form_data['tags']);
         unset($form_data['tags']);
 
-        $link_id = $this->CI->dbsaveit->add_link($form_data, $tags);
-        if ($link_id !== NULL)
+        if ($type === 'link')
+        {
+            $node_id = $this->CI->dbsaveit->add_link($form_data, $tags);
+        }
+        else if ($type === 'category')
+        {
+            $node_id = $this->CI->dbsaveit->add_category($form_data, $tags);
+        }
+        if ($node_id !== NULL)
         {
             $user_tags = $this->CI->dbsaveit->get_tags('t.user_id', $user_id);
 
@@ -32,7 +41,6 @@ class Link
                     {
                         $tag_id = $value->id;
                         $found = true;
-                        echo "Found! ID: $tag_id\n";
                         break;
                     }
                 }
@@ -45,14 +53,23 @@ class Link
                     $tag_id = $this->CI->dbsaveit->add_tag($data);
                     
                 }
-
-                $data = [
-                    'link_id' => $link_id,
-                    'tag_id' => $tag_id
-                ];
-                $this->CI->dbsaveit->add_link_tag($data);
+                if ($type === 'link')
+                {
+                    $data = [
+                        'link_id' => $node_id,
+                        'tag_id' => $tag_id
+                    ];
+                    $this->CI->dbsaveit->add_link_tag($data);
+                }
+                else if ($type === 'category')
+                {
+                    $data = [
+                        'category_id' => $node_id,
+                        'tag_id' => $tag_id
+                    ];
+                    $this->CI->dbsaveit->add_category_tag($data);
+                }
             }
-            die();
             return true;
         }
         else
@@ -61,13 +78,41 @@ class Link
         }
     }
 
-    public function get()
+    public function delete($id)
     {
         $user_id = $this->CI->session->userdata['user_id'];
-        $links = $this->CI->dbsaveit->get_links('user_id', $user_id);
-        if ($links !== NULL)
+        //$result = $this->CI->dbsaveit->delete($id, $user_id);
+        if ($result !== NULL)
         {
-            return $links;
+            return $result;
+        }
+        else
+        {
+            throw new Exception('Error in database');
+        }
+    }
+
+    public function get_categories()
+    {
+        $user_id = $this->CI->session->userdata['user_id'];
+        $result = $this->CI->dbsaveit->get_categories('user_id', $user_id);
+        if ($result !== NULL)
+        {
+            return $result;
+        }
+        else
+        {
+            throw new Exception('Error in database');
+        }
+    }
+
+    public function get_links()
+    {
+        $user_id = $this->CI->session->userdata['user_id'];
+        $result = $this->CI->dbsaveit->get_links('user_id', $user_id);
+        if ($result !== NULL)
+        {
+            return $result;
         }
         else
         {

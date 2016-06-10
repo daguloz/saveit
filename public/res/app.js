@@ -28,6 +28,8 @@ $(document).ready(function () {
 		
 		link_action = "add_link";
 
+		$("#node-add-type-link").prop('checked', true);
+
 		// Hide stuff
 		$("#link-list-buttons").fadeOut();
 		$("#link-list").slideUp();
@@ -35,24 +37,14 @@ $(document).ready(function () {
 		$("#link-list-bottom-buttons").slideUp();
 
 		// Show form
+		$("#node-add-category").hide();
+		$("#node-add-link").show();
 		$("#form-link-add").slideDown();
 		$("#link-list-footer-buttons").slideDown();
 		Utils.showScroll($("#form-link-add"));
 
 		$("#link-list-header-text").fadeOut(function() {
 			$(this).text("Add a node").fadeIn();
-		});
-
-		$("#node-add-type-link").on('change', function (e) {
-			link_action = "add_link";
-			$("#node-add-category").slideUp();
-			$("#node-add-link").slideDown();
-		});
-
-		$("#node-add-type-category").on('change', function (e) {
-			link_action = "add_category";
-			$("#node-add-link").slideUp();
-			$("#node-add-category").slideDown();
 		});
 	});
 
@@ -85,6 +77,19 @@ $(document).ready(function () {
 		});
 
 		Utils.showScroll($("#link-list-header"));
+	});
+
+	// Node add radio button
+	$("#node-add-type-link").on('change', function (e) {
+		link_action = "add_link";
+		$("#node-add-category").slideUp();
+		$("#node-add-link").slideDown();
+	});
+
+	$("#node-add-type-category").on('change', function (e) {
+		link_action = "add_category";
+		$("#node-add-link").slideUp();
+		$("#node-add-category").slideDown();
 	});
 
 	$("#button-link-save").on('click', function(e) {
@@ -151,7 +156,13 @@ $(document).ready(function () {
 			$("#link-delete-url").text(elem.attr('href'));
 			$("#link-delete-name").text(elem.attr('title'));
 			$("#link-delete-description").text(elem.attr('alt'));
+			$("#link-delete-id").val(elem.data('node-id'));
 		}
+	});
+
+	$("#link-delete-confirm").on('click', function() {
+
+		$("#link-delete-form").submit();
 	});
 });
 

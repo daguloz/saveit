@@ -10,9 +10,14 @@ class DbSaveit extends CI_Model
 		$this->CI =& get_instance();
 	}
 
-	public function add_link_tag($data)
+	public function add_category($data)
 	{
-		return $this->insert_row($data, 'links_tags', false);
+		return $this->insert_row($data, 'categories');
+	}
+
+	public function add_category_tag($data)
+	{
+		return $this->insert_row($data, 'categories_tags', false);
 	}
 
 	public function add_tag($data)
@@ -28,14 +33,38 @@ class DbSaveit extends CI_Model
 		return $this->insert_row($data, 'links');
 	}
 
-	public function get_links($type, $value)
+	public function add_link_tag($data)
 	{
-		
-		$this->CI->db->select('id, url, name, description');
+		return $this->insert_row($data, 'links_tags', false);
+	}
+
+	public function get_categories($type, $value)
+	{
+		$this->CI->db->select('id, name, description, parent_id');
 
 		$this->CI->db->where($type, $value);
 
-		// Construye la sentencia SQL y la ejecuta
+		if ($query = $this->CI->db->get('categories')) {
+			$result = [];
+			if ($query->num_rows() > 0)
+			{
+				foreach ($query->result() as $row)
+				{
+					$result[] = $row;
+				}
+			}
+		}
+		return $result;
+	}
+
+	public function get_links($type, $value)
+	{
+		
+		$this->CI->db->select('id, category_id, url, name, description');
+
+		$this->CI->db->where($type, $value);
+		$this->CI->db->order_by('category_id');
+
 		if ($query = $this->CI->db->get('links')) {
 			$result = [];
 			if ($query->num_rows() > 0)
@@ -164,7 +193,7 @@ class DbSaveit extends CI_Model
 
 		$this->CI->db->where($type, $value);
 
-		// Construye la sentencia SQL y la ejecuta
+		// Runs SQL Query
 		if ($query = $this->CI->db->get($table)) {
 			if ($query->num_rows() > 0)
 				return $query->row();
@@ -180,7 +209,7 @@ class DbSaveit extends CI_Model
 
 		$this->CI->db->where($type, $value);
 
-		// Construye la sentencia SQL y la ejecuta
+		// Runs SQL Query
 		if ($query = $this->CI->db->get($table)) {
 			$result = [];
 			if ($query->num_rows() > 0)

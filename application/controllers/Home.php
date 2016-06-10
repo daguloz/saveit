@@ -29,7 +29,8 @@ class Home extends CI_Controller {
                 $this->index_post();
             else
             {
-                $this->data['links'] = $this->link->get();
+                $this->data['categories'] = $this->link->get_categories();
+                $this->data['links'] = $this->link->get_links();
                 $this->render->load();
             }
         }
@@ -43,11 +44,7 @@ class Home extends CI_Controller {
     {
         $type = $this->input->post('type');
 
-        echo '<pre>';
-        print_r($_POST);
-        die();
-        
-        if ($type === 'add_link')
+        if ($type === 'link-add')
         {
             // Obtain form data
             $form_data = [
@@ -61,7 +58,43 @@ class Home extends CI_Controller {
         
             if ($form_data['url'] !== NULL)
             {
-                $this->link->add($form_data);
+                $this->link->add('link', $form_data);
+            }
+            else
+            {
+                $this->data['error'] = "URL is required to save a link";
+            }
+        }
+        else if ($type === 'category-add')
+        {
+            // Obtain form data
+            $form_data = [
+                'name' => $this->input->post('name'),
+                'parent_id' => $this->input->post('parent'),
+                'description' => $this->input->post('description'),
+                'tags' => $this->input->post('tags')
+            ];
+
+            if (trim($form_data['parent_id']) === '') $form_data['parent_id'] = NULL;
+            if (trim($form_data['name']) === '') $form_data['name'] = NULL;
+        
+            if ($form_data['name'] !== NULL)
+            {
+                $this->link->add('category', $form_data);
+            }
+            else
+            {
+                $this->data['error'] = "URL is required to save a link";
+            }
+        }
+        else if ($type === 'link-delete')
+        {
+            $delete_id = $this->input->post('id');
+            if (trim($delete_id === '') $delete_id = NULL;
+
+            if ($delete_id !== NULL)
+            {
+                $this->link->delete('link', $delete_id);
             }
             else
             {
@@ -72,7 +105,11 @@ class Home extends CI_Controller {
         {
             $this->data['error'] = "Unknown error";
         }
-        $this->data['links'] = $this->link->get();
+        $this->data['categories'] = $this->link->get_categories();
+        $this->data['links'] = $this->link->get_links();
         $this->render->load();
     }
 }
+
+
+No me dará tiempo a completar todos los objetivos marcados inicialmente,
